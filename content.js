@@ -112,6 +112,7 @@ const macro = () => {
 
   for (let i = 0; i < len; i++) {
     $row = $rows[i];
+    var success = false;
 
     if (isChecked(++uid)) {
       $row.querySelector("td:nth-child(5)").style.backgroundColor = "#f03e3e";
@@ -126,8 +127,11 @@ const macro = () => {
       if ($button) {
         $button.closest("a").click();
         localStorage.removeItem("macro");
-        chrome.extension.sendMessage({ type: "successTicketing" });
-        break;
+        setTimeout(() => {
+          const ifr = document.querySelector('#embeded-modal-traininfo').contentWindow.document;
+          ifr.querySelector('.btn_blue_ang').click();
+          success = true;
+        }, 200)
       }
     }
 
@@ -144,8 +148,11 @@ const macro = () => {
       if ($button) {
         $button.closest("a").click();
         localStorage.removeItem("macro");
-        chrome.extension.sendMessage({ type: "successTicketing" });
-        break;
+        setTimeout(() => {
+          const ifr = document.querySelector('#embeded-modal-traininfo').contentWindow.document;
+          ifr.querySelector('.btn_blue_ang').click();
+          success = true;
+        }, 200)
       }
     }
 
@@ -157,9 +164,17 @@ const macro = () => {
       if ($button) {
         $button.closest("a").click();
         localStorage.removeItem("macro");
-        chrome.extension.sendMessage({ type: "successTicketing" });
-        break;
+        setTimeout(() => {
+          const ifr = document.querySelector('#embeded-modal-traininfo').contentWindow.document;
+          ifr.querySelector('.btn_blue_ang').click();
+          success = true;
+        }, 200)
       }
+    }
+
+    if (success) {
+      chrome.extension.sendMessage({ type: "successTicketing" });
+      break;
     }
   }
 
